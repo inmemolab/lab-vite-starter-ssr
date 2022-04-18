@@ -1,0 +1,179 @@
+{
+  "name": "lab-vite-base-ssr",
+  "private": false,
+  "version": "1.0.2",
+  "description": "For futures apps",
+  "author": {
+    "name": "EnMemoLab",
+    "email": "enmemolab@gmail.com",
+    "url": "https://enmemolab.com"
+  },
+  "keywords": [
+    "vite",
+    "vue3",
+    "ssr",
+    "typescript",
+    "starter",
+    "prettier",
+    "eslint",
+    "stylelint",
+    "jest",
+    "cypress",
+    "@vueuse",
+    "axios",
+    "pinia",
+    "socket.io",
+    "vue-i18n",
+    "vue-router",
+    "husky",
+    "lint-staged",
+    "commitlint"
+  ],
+  "license": "ISC",
+  "scripts": {
+    "dev": "ts-node server",
+    "build": "yarn build:client && yarn build:server",
+    "preview": "npx http-server dist/static",
+    "build:client": "vite build --ssrManifest --outDir dist/client",
+    "build:server": "vite build --ssr src/entry-server.ts --outDir dist/server",
+    "build:ssg": "vite build --ssrManifest --outDir dist/static && yarn build:server && npx ts-node prerender",
+    "server": "cross-env NODE_ENV=production ts-node server",
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "yarn lint:eslint && yarn lint:prettier && yarn lint:stylelint",
+    "lint:eslint": "yarn eslint --cache --max-warnings 0 --report-unused-disable-directives \"**/*.{js,jsx,ts,tsx,vue,html}\"",
+    "lint:eslint:fix": "yarn lint:eslint --fix",
+    "lint:prettier": "yarn prettier --check \"**/*.{js,jsx,ts,tsx,vue,html,json,md}\"",
+    "lint:prettier:fix": "yarn prettier --write \"**/*.{js,jsx,ts,tsx,vue,html,json,md}\"",
+    "lint:stylelint": "yarn stylelint --cache -q \"**/*.{css,scss,vue}\"",
+    "lint:stylelint:fix": "yarn lint:stylelint --fix",
+    "lint:lint-staged": "lint-staged",
+    "test": "jest --coverage",
+    "test:unit": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:e2e": "start-server-and-test preview http://127.0.0.1:5050/ 'cypress open'",
+    "test:e2e:ci": "start-server-and-test preview http://127.0.0.1:5050/ 'cypress run'",
+    "git:cz": "git cz",
+    "git:cm": "commitlint --config commitlint.config.js -e -V",
+    "precommit": "yarn lint && yarn test && yarn build",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@vueuse/core": "^8.2.6",
+    "@vueuse/head": "^0.7.6",
+    "@vueuse/motion": "^2.0.0-beta.12",
+    "await-to-js": "^3.0.0",
+    "axios": "^0.26.1",
+    "express": "^4.17.3",
+    "moment": "^2.29.2",
+    "moment-timezone": "^0.5.34",
+    "pinia": "^2.0.13",
+    "pinia-plugin-persist": "^1.0.0",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1",
+    "ua-parser-js": "^1.0.2",
+    "vue": "^3.2.33",
+    "vue-i18n": "^9.2.0-beta.30",
+    "vue-router": "^4.0.13"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
+    "@cypress/vite-dev-server": "^2.2.2",
+    "@cypress/vue": "^3.1.1",
+    "@iconify/json": "^2.1.28",
+    "@intlify/vite-plugin-vue-i18n": "^3.4.0",
+    "@pinia/testing": "^0.0.11",
+    "@types/compression": "^1.7.2",
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^17.0.24",
+    "@types/ua-parser-js": "^0.7.36",
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
+    "@typescript-eslint/parser": "^5.19.0",
+    "@vitejs/plugin-legacy": "^1.8.1",
+    "@vitejs/plugin-vue": "^2.3.1",
+    "@vitejs/plugin-vue-jsx": "^1.3.10",
+    "@vue/compiler-sfc": "^3.2.33",
+    "@vue/test-utils": "^2.0.0-rc.20",
+    "@vue/vue3-jest": "^27.0.0-alpha.4",
+    "commitizen": "^4.2.4",
+    "compression": "^1.7.4",
+    "cross-env": "^7.0.3",
+    "cypress": "^9.5.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^6.3.0",
+    "dotenv": "^16.0.0",
+    "eslint": "^8.13.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-html": "^6.2.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.1.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.6.0",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "jest-serializer-vue": "^2.0.2",
+    "jest-transform-stub": "^2.0.0",
+    "jest-watch-typeahead": "^1.0.0",
+    "lint-staged": "^12.3.8",
+    "postcss-html": "^1.4.1",
+    "postcss-scss": "^4.0.3",
+    "prettier": "^2.6.2",
+    "rimraf": "^3.0.2",
+    "rollup-plugin-visualizer": "^5.6.0",
+    "sass": "^1.50.0",
+    "serve-static": "^1.15.0",
+    "start-server-and-test": "^1.14.0",
+    "stylelint": "^14.7.1",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-recommended-vue": "^1.4.0",
+    "stylelint-config-standard": "^25.0.0",
+    "stylelint-order": "^5.0.0",
+    "stylelint-scss": "^4.2.0",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3",
+    "vite": "^2.9.5",
+    "vue-tsc": "^0.34.6",
+    "vue3-jest": "^27.0.0-alpha.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.vue": [
+      "prettier --write",
+      "eslint --fix",
+      "stylelint --fix"
+    ],
+    "*.{scss,less,styl,html}": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.json": [
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inmemolab/lab-vite-base-ssr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/inmemolab/lab-vite-base-ssr/issues"
+  },
+  "homepage": "https://github.com/inmemolab/lab-vite-base-ssr#readme",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  }
+}
